@@ -28,6 +28,9 @@ public partial class TransactionAdd : ContentPage
         }
 
         SaveTransaction();
+
+        int transactionsCount = _repository.GetAll().Count();
+        App.Current.MainPage.DisplayAlert("Mensagem", "", "Ok");
     }
 
     private void SaveTransaction()
