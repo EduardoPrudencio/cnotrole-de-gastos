@@ -12,7 +12,7 @@ public partial class TransactionList : ContentPage
         InitializeComponent();
 
         _repository = transactionRepository;
-        Transactions.ItemsSource = _repository.GetAll();
+        GetFinancialValues();
 
         WeakReferenceMessenger.Default.Register<string>(this, (e, msg) =>
         {
@@ -20,6 +20,23 @@ public partial class TransactionList : ContentPage
         });
     }
 
+    private void GetFinancialValues()
+    {
+        var transactions = _repository.GetAll();
+        Transactions.ItemsSource = transactions;
+
+        decimal expenses = transactions
+            .Where(t => t.Type == Models.TransactionType.Expenses)
+            .Sum(t => t.Value);
+
+        decimal incomes = transactions
+            .Where(t => t.Type == Models.TransactionType.Icome)
+            .Sum(t => t.Value);
+
+        LabelReceita.Text = incomes.ToString("C");
+        LabelDespesa.Text = expenses.ToString("C");
+        LabelTotal.Text = (incomes - expenses).ToString("C");
+    }
 
     private void Button_Clicked_1(object sender, EventArgs e)
     {

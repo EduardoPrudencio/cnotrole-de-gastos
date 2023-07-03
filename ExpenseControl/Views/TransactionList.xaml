@@ -87,7 +87,7 @@
          
              <Label Text="Saldo" />
              <Label 
-                Text="R$ 22.345,00" 
+                x:Name="LabelTotal"
                 FontSize="32"
                 Grid.Row="1"
             />
@@ -106,10 +106,10 @@
                 />
 
                 <Label Text="Receita" Grid.Row="3"/>
-                <Label Text="R$ 2.225,20" Grid.Row="4"/>
+                <Label x:Name="LabelReceita" Grid.Row="4"/>
 
                 <Label Text="Despesa" Grid.Row="3" Grid.Column="1"/>
-                <Label Text="R$ 20.125,00" Grid.Row="4" Grid.Column="1" />
+                <Label  x:Name="LabelDespesa" Grid.Row="4" Grid.Column="1" />
             </Grid>
         </Border>
             
