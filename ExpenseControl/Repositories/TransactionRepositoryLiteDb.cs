@@ -37,5 +37,14 @@ namespace ExpenseControl.Repositories
         {
             _database.GetCollection<Models.Transaction>(_collectionName).Delete(transaction.Id);
         }
+
+        public decimal GetAllExpense()
+        {
+            ILiteCollection<Models.Transaction> collection = _database.GetCollection<Models.Transaction>(_collectionName);
+            var transactions = collection.Query().Where(t => t.Type == Models.TransactionType.Expenses);
+
+            return 10;
+
+        }
     }
 }

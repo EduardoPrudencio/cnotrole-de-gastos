@@ -1,3 +1,4 @@
+using CommunityToolkit.Mvvm.Messaging;
 using ExpenseControl.Models;
 using ExpenseControl.Repositories;
 
@@ -29,8 +30,11 @@ public partial class TransactionAdd : ContentPage
 
         SaveTransaction();
 
-        int transactionsCount = _repository.GetAll().Count();
-        App.Current.MainPage.DisplayAlert("Mensagem", "", "Ok");
+        WeakReferenceMessenger.Default.Send<string>(string.Empty);
+
+        // int transactionsCount = _repository.GetAll().Count();
+        App.Current.MainPage.DisplayAlert("Mensagem", "Transação registrada", "Ok");
+        Navigation.PopModalAsync();
     }
 
     private void SaveTransaction()

@@ -6,6 +6,7 @@
         void Add(Models.Transaction transaction);
         void Update(Models.Transaction transaction);
         void Delete(Models.Transaction transaction);
+        decimal GetAllExpense();
 
     }
 }
