@@ -7,6 +7,8 @@ namespace ExpenseControl.Views;
 public partial class TransactionList : ContentPage
 {
     private ITransactionRepository _repository;
+    private Color _borderOriginalBackgroundColor;
+    private string _labelOriginalText;
 
     public TransactionList(ITransactionRepository transactionRepository)
     {
@@ -20,6 +22,35 @@ public partial class TransactionList : ContentPage
             Transactions.ItemsSource = _repository.GetAll();
             GetFinancialValues();
         });
+    }
+
+    private async Task AnimationBorder(Border border, bool isDeleteAnimation)
+    {
+        var label = (Label)border.Content;
+
+        if (isDeleteAnimation)
+        {
+            _borderOriginalBackgroundColor = border.BackgroundColor;
+            _labelOriginalText = label.Text;
+
+            await border.RotateYTo(90, 200);
+            border.BackgroundColor = Colors.Red;
+
+            label.Text = "X";
+            label.TextColor = Colors.White;
+
+            await border.RotateYTo(180, 200);
+
+        }
+        else
+        {
+            await border.RotateYTo(90, 200);
+            border.BackgroundColor = _borderOriginalBackgroundColor;
+
+            label.Text = _labelOriginalText;
+            label.TextColor = Colors.White;
+            await border.RotateYTo(0, 200);
+        }
     }
 
     private void GetFinancialValues()
@@ -59,7 +90,11 @@ public partial class TransactionList : ContentPage
 
     private async void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
     {
+
+        await AnimationBorder((Border)sender, true);
         bool response = await App.Current.MainPage.DisplayAlert("Excluir", "Deseja excluir esse item?", "sim", "não");
+
+        await AnimationBorder((Border)sender, false);
 
         if (response)
         {
