@@ -48,7 +48,6 @@ public partial class TransactionList : ContentPage
 
     private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
     {
-
         var grid = (Grid)sender;
         var gesture = (TapGestureRecognizer)grid.GestureRecognizers[0];
         Transaction transaction = (Transaction)gesture.CommandParameter;
@@ -60,10 +59,6 @@ public partial class TransactionList : ContentPage
 
     private async void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
     {
-        //var border = (Border) sender;
-        //var gesture = (TapGestureRecognizer) border.GestureRecognizers.First();
-        //Transaction transaction = (Transaction)gesture.CommandParameter;
-
         bool response = await App.Current.MainPage.DisplayAlert("Excluir", "Deseja excluir esse item?", "sim", "não");
 
         if (response)

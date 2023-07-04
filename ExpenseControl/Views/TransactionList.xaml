@@ -13,6 +13,7 @@
         <ResourceDictionary>
             <converters:TransactionColorValueConverter x:Key="TransactionColorValueConverter" />
             <converters:TransactionValueConverter x:Key="TransactionValueConverter" />
+            <converters:TransactionNameColor x:Key="TransactionNameColor" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -30,7 +31,8 @@
 
                             </Grid.GestureRecognizers>
                             <Border 
-                BackgroundColor="green" 
+                                   BackgroundColor="{Binding Name, Converter={StaticResource TransactionNameColor}}"
+
                 HeightRequest="40"
                 StrokeShape="RoundRectangle 30"
                 StrokeThickness="0"
