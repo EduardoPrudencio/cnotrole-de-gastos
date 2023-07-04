@@ -58,4 +58,19 @@ public partial class TransactionList : ContentPage
         Navigation.PushModalAsync(transactionEdit);
     }
 
+    private async void TapGestureRecognizer_Tapped_1(object sender, TappedEventArgs e)
+    {
+        //var border = (Border) sender;
+        //var gesture = (TapGestureRecognizer) border.GestureRecognizers.First();
+        //Transaction transaction = (Transaction)gesture.CommandParameter;
+
+        bool response = await App.Current.MainPage.DisplayAlert("Excluir", "Deseja excluir esse item?", "sim", "não");
+
+        if (response)
+        {
+            Transaction transaction = (Transaction)e.Parameter;
+            _repository.Delete(transaction);
+            GetFinancialValues();
+        }
+    }
 }

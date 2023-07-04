@@ -36,6 +36,9 @@
                 StrokeThickness="0"
                 Margin="0,0,10,0"
             >
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer CommandParameter="{Binding .}" Tapped="TapGestureRecognizer_Tapped_1" />
+                                </Border.GestureRecognizers>
                                 <Label 
                    Text="{Binding Name[0]}"
                    FontSize="22"
