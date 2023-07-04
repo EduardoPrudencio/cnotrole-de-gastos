@@ -19,6 +19,11 @@
                 <DataTemplate>
                     <VerticalStackLayout HeightRequest="70">
                         <Grid ColumnDefinitions="50, *, Auto">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}" />
+
+
+                            </Grid.GestureRecognizers>
                             <Border 
                 BackgroundColor="green" 
                 HeightRequest="40"
@@ -67,9 +72,6 @@
             Text="Lista de transações"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-
-        
-        <Button Text="Editar Transação" Clicked="Button_Clicked_1"   />
 
         <Border 
             Margin="0,10"

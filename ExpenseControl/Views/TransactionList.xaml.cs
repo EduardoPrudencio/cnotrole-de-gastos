@@ -1,4 +1,5 @@
 using CommunityToolkit.Mvvm.Messaging;
+using ExpenseControl.Models;
 using ExpenseControl.Repositories;
 
 namespace ExpenseControl.Views;
@@ -38,15 +39,22 @@ public partial class TransactionList : ContentPage
         LabelTotal.Text = (incomes - expenses).ToString("C");
     }
 
-    private void Button_Clicked_1(object sender, EventArgs e)
-    {
-        var transactionEdit = Handler.MauiContext.Services.GetService<TransactionEdit>();
-        Navigation.PushModalAsync(transactionEdit);
-    }
-
     private void Button_Clicked_2(object sender, EventArgs e)
     {
         var transactionAdd = Handler.MauiContext.Services.GetService<TransactionAdd>();
         Navigation.PushModalAsync(transactionAdd);
     }
+
+    private void TapGestureRecognizer_Tapped(object sender, TappedEventArgs e)
+    {
+
+        var grid = (Grid)sender;
+        var gesture = (TapGestureRecognizer)grid.GestureRecognizers[0];
+        Transaction transaction = (Transaction)gesture.CommandParameter;
+
+        var transactionEdit = Handler.MauiContext.Services.GetService<TransactionEdit>();
+        transactionEdit.SetTransactionToEdit(transaction);
+        Navigation.PushModalAsync(transactionEdit);
+    }
+
 }
