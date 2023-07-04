@@ -11,6 +11,13 @@
 
     <VerticalStackLayout Spacing="10" Padding="15,0">
 
+        <Label 
+               Text="Os dados informados não são válidos. Verifique e tente novamente." 
+               TextColor="Red"
+               x:Name="LabelError"
+                IsVisible="false"
+            />
+
         <Border BackgroundColor="{StaticResource Orange100}" Padding="15" Stroke="Transparent" StrokeShape="RoundRectangle 30">
             <Grid RowDefinitions="Auto" ColumnDefinitions="*, 30">
                 <Label 
@@ -43,7 +50,7 @@
         <DatePicker x:Name="DatePickerDate" />
         <Entry x:Name="EntryValue" Placeholder="Valor" />
 
-        <Button Text="Salvar" HorizontalOptions="Fill" />
+        <Button Text="Salvar" HorizontalOptions="Fill" Clicked="Button_Clicked" />
 
 
     </VerticalStackLayout>

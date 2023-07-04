@@ -18,6 +18,7 @@ public partial class TransactionList : ContentPage
         WeakReferenceMessenger.Default.Register<string>(this, (e, msg) =>
         {
             Transactions.ItemsSource = _repository.GetAll();
+            GetFinancialValues();
         });
     }
 

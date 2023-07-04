@@ -52,13 +52,8 @@ public partial class TransactionAdd : ContentPage
         _repository.Add(transaction);
     }
 
-    private bool IsValid()
-    {
-        bool valid = !string.IsNullOrWhiteSpace(EntryName.Text) &&
+    private bool IsValid() =>
+        !string.IsNullOrWhiteSpace(EntryName.Text) &&
            !string.IsNullOrWhiteSpace(EntryValue.Text) &&
             decimal.Parse(EntryValue.Text) > 0;
-
-        return valid;
-    }
-
 }
