@@ -22,6 +22,20 @@ public partial class TransactionList : ContentPage
             Transactions.ItemsSource = _repository.GetAll();
             GetFinancialValues();
         });
+
+        WeakReferenceMessenger.Default.Register<ShowHiddenValue>(this, (e, msg) =>
+        {
+            if (!msg.Show)
+            {
+                LabelReceita.Text = "...............";
+                LabelDespesa.Text = "..............."; ;
+                LabelTotal.Text = "..............."; ;
+            }
+            else
+            {
+                GetFinancialValues();
+            }
+        });
     }
 
     private async Task AnimationBorder(Border border, bool isDeleteAnimation)
@@ -101,6 +115,23 @@ public partial class TransactionList : ContentPage
             Transaction transaction = (Transaction)e.Parameter;
             _repository.Delete(transaction);
             GetFinancialValues();
+        }
+    }
+
+    private void TapGestureRecognizer_Tapped_2(object sender, TappedEventArgs e)
+    {
+        string value = ((Image)sender).Source.ToString();
+
+        if (((Image)sender).Source.ToString().Equals("File: close_eye.png"))
+        {
+            ((Image)sender).Source = "open_eye.png";
+            WeakReferenceMessenger.Default.Send(new ShowHiddenValue { Show = false });
+        }
+        else
+        {
+            WeakReferenceMessenger.Default.Send(new ShowHiddenValue { Show = true });
+            ((Image)sender).Source = "close_eye.png";
+
         }
     }
 }
