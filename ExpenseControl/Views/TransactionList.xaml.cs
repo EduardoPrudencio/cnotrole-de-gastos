@@ -30,6 +30,10 @@ public partial class TransactionList : ContentPage
                 LabelReceita.Text = "...............";
                 LabelDespesa.Text = "..............."; ;
                 LabelTotal.Text = "..............."; ;
+
+                List<Transaction> transactions = _repository.GetAll().ToList();
+                transactions.ForEach(t => t.Value = 0);
+                Transactions.ItemsSource = transactions;
             }
             else
             {
